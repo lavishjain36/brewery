@@ -87,50 +87,53 @@ let employees = [
   ];
 
 
-  //All EMployee Data
+  //All Employee Data 
   let allEmpButton=document.querySelector("#all-emp-btn");
   allEmpButton.addEventListener("click",function(){
     displayEmployees(employees);
-  })
-  
 
-  //All the male employee if user click on Male Button
-  let maleButton = document.querySelector("#male-emp-btn");
+  })
+
+
+
+  //All Male EMployees if user click on Male buttton 
+  let maleButton=document.querySelector("#male-emp-btn");
   maleButton.addEventListener("click",function(){
       let maleEmployee=employees.filter(function(employee){
-          return employee.gender==="male"; 
+            return employee.gender==="male";
+      })
+      console.table(maleEmployee)
+      displayEmployees(maleEmployee);
   })
-  console.log(maleEmployee);
-  displayEmployees(maleEmployee)
-});
 
 
-let femaleButton = document.querySelector("#female-emp-btn");
+  let femaleButton=document.querySelector("#female-emp-btn");
   femaleButton.addEventListener("click",function(){
       let femaleEmployee=employees.filter(function(employee){
-          return employee.gender==="female"; 
+            return employee.gender==="female";
+      })
+      console.table(femaleEmployee)
+      displayEmployees(femaleEmployee);
   })
-  console.log(femaleEmployee);
-  displayEmployees(femaleEmployee)
-});
 
-//Search Functionality  logic body
+
+
+  //Search Functionality Logic 
 
 let searchBox=document.querySelector("#search-box");
 searchBox.addEventListener("keydown",function(){
-    let textEntered=searchBox.value;
+    let textEntered=searchBox.value;//user enter text
     console.log(textEntered);
+
     let filteredEmployees=[];
     if(textEntered!=""){
-        //TO populate the data on search box 
+        //populate the data on search box 
         filteredEmployees=employees.filter(function(employee){
-            return employee.first_name.toLowerCase().includes(textEntered.toLowerCase()) || employee.last_name.toLowerCase().includes(textEntered.toLowerCase());
-        })
-        displayEmployees(filteredEmployees);
-
+            return employee.first_name.toLowerCase().includes(textEntered.toLowerCase()) || employee.last_name.toLowerCase().includes(textEntered.toLowerCase())|| employee.email.toLowerCase().includes(textEntered.toLowerCase());
+    })
+    displayEmployees(filteredEmployees);
     }
-
-
+    
 })
 
 
@@ -140,23 +143,31 @@ searchBox.addEventListener("keydown",function(){
 
 
 
-  //Display data to  get the data if user click on the button 
 
-let displayEmployees=(employees)=>{
-    //select the tab;le body using table-body 
-    let tableBody=document.querySelector("#table-body");
 
-    //clear the table body
-    let tableRow="";
-    for(let employee of employees){
-        tableRow+=`<tr>
-        <td>${employee.id}</td>
-        <td>${employee.first_name}</td>
-        <td>${employee.last_name}</td>
-        <td>${employee.email}</td>
-        <td>${employee.gender}</td>
-        <td>${employee.ip_address}</td>   
-        </tr>`
-        tableBody.innerHTML =tableRow
-    }
-}
+  //Display Data to get the data if user click on the button
+  let displayEmployees=(employees)=>{
+      //select the table 
+      let tablebody=document.querySelector("#table-body");
+
+
+      //clear the table body 
+      let tableRow="";
+      for(let employee of employees){
+          tableRow+=`
+          <tr>
+            <td>${employee.id}</td>
+            <td>${employee.first_name}</td>
+            <td>${employee.last_name}</td>
+            <td>${employee.email}</td>
+            <td>${employee.gender}</td>
+            <td>${employee.ip_address}</td>
+            </tr>
+           
+          `
+          tablebody.innerHTML=tableRow;
+      }
+
+
+
+  }
