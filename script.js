@@ -1,32 +1,41 @@
-let list1=[];
-let list2=[];
-let list3=[];
-let list4=[];
-let n=1;
-let x=1;
-function AddRow(){
-  let addrown=document.getElementById("show");
-  let newrow=addrown.insertRow(n)
-
-  list1[x]=document.getElementById("fname").value;
-  list2[x]=document.getElementById("lname").value;
-  list3[x]=document.getElementById("email").value;
-  list4[x]=document.getElementById("age").value;
+// const url="https://restcountries.com/v3.1/all"
+// fetch(url)
+// .then((response)=>response.json())
+// .then((data)=>{
+//   //Get the dat from the api
+//   console.log(data[92].capital);
+// })
+// .catch((error)=>{
+//   //If there is an error
+//   console.log(error);
+// });
 
 
-  let cell1=newrow.insertCell(0);
-  let cell2=newrow.insertCell(1);
-  let cell3=newrow.insertCell(2);
-  let cell4=newrow.insertCell(3);
+const fetchDataBtn=document.querySelector("#fetchdata");
+const result=document.querySelector("#result");
 
-  cell1.innerHTML=list1[x];
-  cell2.innerHTML=list2[x];
-  cell3.innerHTML=list3[x];
-  cell4.innerHTML=list4[x];
 
-  document.getElementById("fname").value="";
-  document.getElementById("lname").value="";
-  document.getElementById("email").value="";
-  document.getElementById("age").value="";
+//Get the data from API and set the content of the result div
+async function getData(){
+  result.innerText="Loading....";
+  try {
+    //Fetch of data code 
+    const res=await fetch("https://api.github.com/users/lavishjain36");
+    const data=await res.json();
+    // result.innerText=`${data.name} has ${data.public_repos} repos`;
+    result.innerText=JSON.stringify(data);
+
+    
+  } catch (error) {
+    //Handle error here
+    result.innerText="Error";
+    
+  }
 
 }
+
+//Add a event Listener
+fetchDataBtn.addEventListener("click",function(){
+  getData();
+});
+
